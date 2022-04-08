@@ -1,4 +1,4 @@
-import { Endereco } from '@/domain/aggregates/Endereco';
+import { Endereco } from '@/domain/aggregates/endereco';
 import { Entity } from '@/domain/seed-work/entity';
 import { IAggregateRoot } from '@/domain/seed-work/aggregate-root.interface';
 
