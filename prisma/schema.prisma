@@ -1,0 +1,34 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Unidade {
+  id           Int      @id @default(autoincrement())
+  descricao    String
+  urlAmigavel  String
+  estado       String
+  cidade       String
+  logradouro   String
+  numero       String
+  bairro       String
+  cep          BigInt
+  latitude     Float
+  longitude    Float
+  telefone     BigInt?
+  celular      BigInt?
+  email        String?
+  urlFacebook  String?
+  urlInstagram String?
+  urlYoutube   String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  status       Boolean
+}
