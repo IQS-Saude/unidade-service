@@ -3,10 +3,8 @@ import {
   IsBooleanString,
   IsNumberString,
   IsOptional,
-  IsPositive,
   IsString,
   Matches,
-  Max,
   ValidateNested,
 } from 'class-validator';
 import { Type } from 'class-transformer';
@@ -58,8 +56,6 @@ export class AtualizarUnidadeEnderecoRequest {
     example: 15015300,
   })
   @IsNumberString({ message: 'cep deve ser um numero inteiro' })
-  @IsPositive({ message: 'cep deve ser um numero positivo' })
-  @Max(99999999)
   cep: number;
 
   @ApiProperty({
