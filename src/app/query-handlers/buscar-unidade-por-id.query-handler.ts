@@ -1,4 +1,4 @@
-import { IQueryHandler } from '@nestjs/cqrs';
+import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { BuscarUnidadePorIdQuery } from '@/app/queries/buscar-unidade-por-id.query';
 import { UnidadeResponse } from '@/app/dtos/response/unidade.response';
 import { Inject } from '@nestjs/common';
@@ -8,6 +8,7 @@ import {
 } from '@/app/ports/unidade-repository.interface';
 import { UnidadeNaoEncontradaException } from '@/app/exceptions/unidade-nao-encontrada.exception';
 
+@QueryHandler(BuscarUnidadePorIdQuery)
 export class BuscarUnidadePorIdQueryHandler
   implements IQueryHandler<BuscarUnidadePorIdQuery, UnidadeResponse>
 {
