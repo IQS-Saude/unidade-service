@@ -1,8 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
-  IsBoolean,
-  IsInt,
-  IsNumber,
+  IsBooleanString,
+  IsNumberString,
   IsOptional,
   IsPositive,
   IsString,
@@ -58,7 +57,7 @@ export class CriarUnidadeEnderecoRequest {
     description: 'Cep da unidade',
     example: 15015300,
   })
-  @IsInt({ message: 'cep deve ser um numero inteiro' })
+  @IsNumberString({ message: 'cep deve ser um numero inteiro' })
   @IsPositive({ message: 'cep deve ser um numero positivo' })
   @Max(99999999)
   cep: number;
@@ -67,7 +66,7 @@ export class CriarUnidadeEnderecoRequest {
     description: 'Latitude da unidade',
     example: -20.82005724475512,
   })
-  @IsNumber(
+  @IsNumberString(
     {
       allowInfinity: false,
       allowNaN: false,
@@ -80,7 +79,7 @@ export class CriarUnidadeEnderecoRequest {
     description: 'Longitude da unidade',
     example: -49.339789263013024,
   })
-  @IsNumber(
+  @IsNumberString(
     {
       allowInfinity: false,
       allowNaN: false,
@@ -118,7 +117,7 @@ export class CriarUnidadeRequest {
     example: 1731218410,
   })
   @IsOptional()
-  @IsInt({ message: 'telefone deve ser um numero inteiro' })
+  @IsNumberString({ message: 'telefone deve ser um numero inteiro' })
   telefone?: number;
 
   @ApiPropertyOptional({
@@ -126,7 +125,7 @@ export class CriarUnidadeRequest {
     example: 17982266554,
   })
   @IsOptional()
-  @IsInt({ message: 'celular deve ser um numero inteiro' })
+  @IsNumberString({ message: 'celular deve ser um numero inteiro' })
   celular?: number;
 
   @ApiPropertyOptional({
@@ -166,7 +165,7 @@ export class CriarUnidadeRequest {
     example: true,
   })
   @IsOptional()
-  @IsBoolean({ message: 'status deve ser um booleano' })
+  @IsBooleanString({ message: 'status deve ser um booleano' })
   status: boolean;
 }
 
