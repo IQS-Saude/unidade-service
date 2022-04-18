@@ -35,11 +35,11 @@ export class UnidadeModel {
   @Column('bigint')
   cep: number;
 
-  @Column('decimal')
-  latitude: number;
+  @Column('decimal', { nullable: true })
+  latitude?: number;
 
-  @Column('decimal')
-  longitude: number;
+  @Column('decimal', { nullable: true })
+  longitude?: number;
 
   @Column('bigint', { nullable: true })
   telefone?: number;
@@ -47,7 +47,7 @@ export class UnidadeModel {
   @Column('bigint', { nullable: true })
   celular?: number;
 
-  @Column({ nullable: true })
+  @Column()
   email?: string;
 
   @Column({ nullable: true })

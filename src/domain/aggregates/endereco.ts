@@ -7,8 +7,8 @@ export interface IEnderecoProps {
   numero: string;
   bairro: string;
   cep: number;
-  latitude: number;
-  longitude: number;
+  latitude?: number;
+  longitude?: number;
 }
 
 export class Endereco extends ValueObject<IEnderecoProps> {
@@ -20,35 +20,35 @@ export class Endereco extends ValueObject<IEnderecoProps> {
     return new Endereco(props);
   }
 
-  public get estado(): string {
+  public get estado() {
     return this.props.estado;
   }
 
-  public get cidade(): string {
+  public get cidade() {
     return this.props.cidade;
   }
 
-  public get logradouro(): string {
+  public get logradouro() {
     return this.props.logradouro;
   }
 
-  public get numero(): string {
+  public get numero() {
     return this.props.numero;
   }
 
-  public get bairro(): string {
+  public get bairro() {
     return this.props.bairro;
   }
 
-  public get cep(): number {
+  public get cep() {
     return this.props.cep;
   }
 
-  public get latitude(): number {
+  public get latitude() {
     return this.props.latitude;
   }
 
-  public get longitude(): number {
+  public get longitude() {
     return this.props.longitude;
   }
 }

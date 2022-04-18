@@ -8,7 +8,7 @@ export interface IUnidadeProps {
   endereco: Endereco;
   telefone?: number;
   celular?: number;
-  email?: string;
+  email: string;
   urlFacebook?: string;
   urlInstagram?: string;
   urlYoutube?: string;

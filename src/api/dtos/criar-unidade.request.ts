@@ -58,10 +58,11 @@ export class CriarUnidadeEnderecoRequest {
   @IsNumberString({ message: 'cep deve ser um numero inteiro' })
   cep: number;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'Latitude da unidade',
     example: -20.82005724475512,
   })
+  @IsOptional()
   @IsNumberString(
     {
       allowInfinity: false,
@@ -69,12 +70,13 @@ export class CriarUnidadeEnderecoRequest {
     },
     { message: 'latitude é um numero' },
   )
-  latitude: number;
+  latitude?: number;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     description: 'Longitude da unidade',
     example: -49.339789263013024,
   })
+  @IsOptional()
   @IsNumberString(
     {
       allowInfinity: false,
@@ -82,7 +84,7 @@ export class CriarUnidadeEnderecoRequest {
     },
     { message: 'longitude é um numero' },
   )
-  longitude: number;
+  longitude?: number;
 }
 
 export class CriarUnidadeRequest {
@@ -124,7 +126,7 @@ export class CriarUnidadeRequest {
   @IsNumberString({ message: 'celular deve ser um numero inteiro' })
   celular?: number;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: 'Email de contato da unidade',
     example: 'contato@iqs.com.br',
   })
@@ -133,12 +135,13 @@ export class CriarUnidadeRequest {
     { message: 'email deve ser um E-mail valido' },
   )
   @IsString({ message: 'email deve ser uma string' })
-  email?: string;
+  email: string;
 
   @ApiPropertyOptional({
     description: 'Url do facebook da unidade',
     example: 'www.facebook.com/iqs',
   })
+  @IsOptional()
   @IsString({ message: 'url_facebook deve ser uma string' })
   url_facebook?: string;
 
@@ -146,6 +149,7 @@ export class CriarUnidadeRequest {
     description: 'Url do instagram da unidade',
     example: 'www.instagram.com/iqs',
   })
+  @IsOptional()
   @IsString({ message: 'url_instagram deve ser uma string' })
   url_instagram?: string;
 
@@ -153,6 +157,7 @@ export class CriarUnidadeRequest {
     description: 'Url do youtube da unidade',
     example: 'www.youtube.com/iqs',
   })
+  @IsOptional()
   @IsString({ message: 'url_youtube deve ser uma string' })
   url_youtube?: string;
 
