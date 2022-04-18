@@ -30,4 +30,10 @@ export class UnidadeRepository implements IUnidadeRepository {
 
     return models.map(UnidadeMapper.toDomain);
   }
+
+  async buscarPorId(id: number): Promise<Unidade | null> {
+    const model = await this.repository.findOne({ id });
+
+    return model ? UnidadeMapper.toDomain(model) : null;
+  }
 }

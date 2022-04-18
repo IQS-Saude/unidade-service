@@ -4,6 +4,7 @@ import { CqrsModule } from '@nestjs/cqrs';
 import { CriarUnidadeCommandHandler } from '@/app/command-handlers/criar-unidade.command-handler';
 import { AtualizarUnidadeCommandHandler } from '@/app/command-handlers/atualizar-unidade.command-handler';
 import { ListarTodasUnidadesQueryHandler } from '@/app/query-handlers/listar-todas-unidades.query-handler';
+import { BuscarUnidadePorIdQueryHandler } from '@/app/query-handlers/buscar-unidade-por-id.query-handler';
 
 @Module({
   imports: [DomainModule, CqrsModule],
@@ -11,6 +12,7 @@ import { ListarTodasUnidadesQueryHandler } from '@/app/query-handlers/listar-tod
     CriarUnidadeCommandHandler,
     AtualizarUnidadeCommandHandler,
     ListarTodasUnidadesQueryHandler,
+    BuscarUnidadePorIdQueryHandler,
   ],
 })
 export class AppModule {}

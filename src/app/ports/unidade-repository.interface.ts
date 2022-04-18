@@ -6,4 +6,6 @@ export interface IUnidadeRepository {
   salvar(unidade: Unidade): Promise<Unidade>;
 
   listarTodos(): Promise<Unidade[]>;
+
+  buscarPorId(id: number): Promise<Unidade | null>;
 }
