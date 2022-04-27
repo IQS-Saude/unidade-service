@@ -63,4 +63,10 @@ export class Unidade extends Entity<IUnidadeProps> implements IAggregateRoot {
   public get status() {
     return this.props.status;
   }
+
+  public desativarUnidade() {
+    this.props.status = false;
+    // TODO adicionar o evento de desativacao de unidade
+    // this.addDomainEvents()
+  }
 }

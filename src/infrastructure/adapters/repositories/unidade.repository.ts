@@ -26,7 +26,7 @@ export class UnidadeRepository implements IUnidadeRepository {
   }
 
   async listarTodos(): Promise<Unidade[]> {
-    const models = await this.repository.find();
+    const models = await this.repository.find({ status: true });
 
     return models.map(UnidadeMapper.toDomain);
   }
