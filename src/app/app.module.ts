@@ -6,12 +6,14 @@ import { AtualizarUnidadeCommandHandler } from '@/app/command-handlers/atualizar
 import { ListarTodasUnidadesQueryHandler } from '@/app/query-handlers/listar-todas-unidades.query-handler';
 import { BuscarUnidadePorIdQueryHandler } from '@/app/query-handlers/buscar-unidade-por-id.query-handler';
 import { DesativarUnidadeCommandHandler } from '@/app/command-handlers/desativar-unidade.command-handler';
+import { AtivarUnidadeCommandHandler } from '@/app/command-handlers/ativar-unidade.command-handler';
 
 @Module({
   imports: [DomainModule, CqrsModule],
   providers: [
     CriarUnidadeCommandHandler,
     AtualizarUnidadeCommandHandler,
+    AtivarUnidadeCommandHandler,
     DesativarUnidadeCommandHandler,
     ListarTodasUnidadesQueryHandler,
     BuscarUnidadePorIdQueryHandler,

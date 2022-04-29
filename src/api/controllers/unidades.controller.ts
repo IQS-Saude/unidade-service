@@ -16,6 +16,7 @@ import { AtualizarUnidadeCommand } from '@/app/commands/atualizar-unidade.comman
 import { ListarTodasUnidadesQuery } from '@/app/queries/listar-todas-unidades.query';
 import { BuscarUnidadePorIdQuery } from '@/app/queries/buscar-unidade-por-id.query';
 import { DesativarUnidadeCommand } from '@/app/commands/desativar-unidade.command';
+import { AtivarUnidadeCommand } from '@/app/commands/ativar-unidade.command';
 
 @ApiTags('UnidadesController')
 @Controller()
@@ -50,6 +51,11 @@ export class UnidadesController {
   @Get(':id')
   async buscarPorId(@Param('id') id: number) {
     return this.queryBus.execute(new BuscarUnidadePorIdQuery(id));
+  }
+
+  @Post(':id/ativar')
+  async ativar(@Param('id') id: number) {
+    return this.commandBus.execute(new AtivarUnidadeCommand(id));
   }
 
   @Post(':id/desativar')

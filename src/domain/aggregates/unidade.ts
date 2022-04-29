@@ -1,6 +1,8 @@
 import { Endereco } from '@/domain/aggregates/endereco';
 import { Entity } from '@/domain/seed-work/entity';
 import { IAggregateRoot } from '@/domain/seed-work/aggregate-root.interface';
+import { UnidadeJaDesativadaException } from '@/domain/exceptions/unidade-ja-desativada.exception';
+import { UnidadeJaAtivadaException } from '@/domain/exceptions/unidade-ja-ativada.exception';
 
 export interface IUnidadeProps {
   descricao: string;
@@ -65,8 +67,22 @@ export class Unidade extends Entity<IUnidadeProps> implements IAggregateRoot {
   }
 
   public desativarUnidade() {
+    if (!this.props.status) {
+      throw new UnidadeJaDesativadaException();
+    }
+
     this.props.status = false;
     // TODO adicionar o evento de desativacao de unidade
+    // this.addDomainEvents()
+  }
+
+  public ativarUnidade() {
+    if (this.props.status) {
+      throw new UnidadeJaAtivadaException();
+    }
+
+    this.props.status = true;
+    // TODO adicionar o evento de ativacao de unidade
     // this.addDomainEvents()
   }
 }
