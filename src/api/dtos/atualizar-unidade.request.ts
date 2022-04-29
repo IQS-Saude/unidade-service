@@ -53,14 +53,14 @@ export class AtualizarUnidadeEnderecoRequest {
 
   @ApiProperty({
     description: 'Cep da unidade',
-    example: 15015300,
+    example: '15015300',
   })
   @IsNumberString({ message: 'cep deve ser um numero inteiro' })
   cep: number;
 
   @ApiPropertyOptional({
     description: 'Latitude da unidade',
-    example: -20.82005724475512,
+    example: '-20.82005724475512',
   })
   @IsOptional()
   @IsNumberString(
@@ -74,7 +74,7 @@ export class AtualizarUnidadeEnderecoRequest {
 
   @ApiPropertyOptional({
     description: 'Longitude da unidade',
-    example: -49.339789263013024,
+    example: '-49.339789263013024',
   })
   @IsOptional()
   @IsNumberString(
@@ -170,11 +170,11 @@ export class AtualizarUnidadeRequest {
 
   @ApiPropertyOptional({
     description: 'Status da unidade',
-    example: true,
+    example: '1',
   })
   @IsOptional()
   @IsBooleanString({ message: 'status deve ser um booleano' })
-  status: boolean;
+  status: string;
 }
 
 export class AtualizarUnidadeDataRequest {

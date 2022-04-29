@@ -10,7 +10,7 @@ import { BuscarUnidadePorIdQuery } from '@/app/queries/buscar-unidade-por-id.que
 import { DesativarUnidadeCommand } from '@/app/commands/desativar-unidade.command';
 
 @ApiTags('UnidadesController')
-@Controller('unidades')
+@Controller()
 export class UnidadesController {
   constructor(
     private readonly commandBus: CommandBus,

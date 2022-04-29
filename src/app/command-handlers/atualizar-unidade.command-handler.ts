@@ -41,7 +41,7 @@ export class AtualizarUnidadeCommandHandler
         urlFacebook: request.url_facebook,
         urlInstagram: request.url_instagram,
         urlYoutube: request.url_youtube,
-        status: request.status,
+        status: request.status === '1',
       },
       request.id,
     );
