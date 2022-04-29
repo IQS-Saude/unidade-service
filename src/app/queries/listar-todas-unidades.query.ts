@@ -1,1 +1,3 @@
-export class ListarTodasUnidadesQuery {}
+export class ListarTodasUnidadesQuery {
+  constructor(public readonly desativados: boolean) {}
+}

@@ -1,8 +1,16 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CriarUnidadeDataRequest } from '@/api/dtos/criar-unidade.request';
 import { CriarUnidadeCommand } from '@/app/commands/criar-unidade.command';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 import { AtualizarUnidadeDataRequest } from '@/api/dtos/atualizar-unidade.request';
 import { AtualizarUnidadeCommand } from '@/app/commands/atualizar-unidade.command';
 import { ListarTodasUnidadesQuery } from '@/app/queries/listar-todas-unidades.query';
@@ -27,9 +35,16 @@ export class UnidadesController {
     return this.commandBus.execute(new AtualizarUnidadeCommand(request.data));
   }
 
+  @ApiQuery({
+    name: 'desativados',
+    type: Boolean,
+    description:
+      'Mandar como true caso queira retornar unidades com status false',
+    required: false,
+  })
   @Get()
-  async listarTodos() {
-    return this.queryBus.execute(new ListarTodasUnidadesQuery());
+  async listarTodos(@Query('desativados') desativados?: boolean) {
+    return this.queryBus.execute(new ListarTodasUnidadesQuery(desativados));
   }
 
   @Get(':id')

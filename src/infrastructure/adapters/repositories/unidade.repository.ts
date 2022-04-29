@@ -25,8 +25,14 @@ export class UnidadeRepository implements IUnidadeRepository {
     return UnidadeMapper.toDomain(await this.repository.save(model));
   }
 
-  async listarTodos(): Promise<Unidade[]> {
-    const models = await this.repository.find({ status: true });
+  async listarTodos(desativados: boolean): Promise<Unidade[]> {
+    let conditions = {};
+
+    if (!desativados) {
+      conditions = { status: true };
+    }
+
+    const models = await this.repository.find(conditions);
 
     return models.map(UnidadeMapper.toDomain);
   }
