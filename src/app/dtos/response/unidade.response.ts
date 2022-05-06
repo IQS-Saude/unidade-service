@@ -20,5 +20,5 @@ export interface UnidadeResponse {
   url_facebook?: string;
   url_instagram?: string;
   url_youtube?: string;
-  status: boolean;
+  status: string;
 }

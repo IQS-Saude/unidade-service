@@ -17,6 +17,7 @@ import { ListarTodasUnidadesQuery } from '@/app/queries/listar-todas-unidades.qu
 import { BuscarUnidadePorIdQuery } from '@/app/queries/buscar-unidade-por-id.query';
 import { DesativarUnidadeCommand } from '@/app/commands/desativar-unidade.command';
 import { AtivarUnidadeCommand } from '@/app/commands/ativar-unidade.command';
+import { DashboardUnidadeQuery } from '@/app/queries/dashboard-unidade.query';
 
 @ApiTags('UnidadesController')
 @Controller()
@@ -48,18 +49,23 @@ export class UnidadesController {
     return this.queryBus.execute(new ListarTodasUnidadesQuery(desativados));
   }
 
-  @Get(':id')
+  @Get('/unidade/:id')
   async buscarPorId(@Param('id') id: number) {
     return this.queryBus.execute(new BuscarUnidadePorIdQuery(id));
   }
 
-  @Post(':id/ativar')
+  @Post('/unidade/:id/ativar')
   async ativar(@Param('id') id: number) {
     return this.commandBus.execute(new AtivarUnidadeCommand(id));
   }
 
-  @Post(':id/desativar')
+  @Post('/unidade/:id/desativar')
   async desativar(@Param('id') id: number) {
     return this.commandBus.execute(new DesativarUnidadeCommand(id));
+  }
+
+  @Get('/dashboard')
+  async dashboard() {
+    return this.queryBus.execute(new DashboardUnidadeQuery());
   }
 }

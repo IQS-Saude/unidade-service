@@ -7,6 +7,7 @@ import { ListarTodasUnidadesQueryHandler } from '@/app/query-handlers/listar-tod
 import { BuscarUnidadePorIdQueryHandler } from '@/app/query-handlers/buscar-unidade-por-id.query-handler';
 import { DesativarUnidadeCommandHandler } from '@/app/command-handlers/desativar-unidade.command-handler';
 import { AtivarUnidadeCommandHandler } from '@/app/command-handlers/ativar-unidade.command-handler';
+import { DashboardUnidadeQueryHandler } from '@/app/query-handlers/dashboard-unidade.query-handler';
 
 @Module({
   imports: [DomainModule, CqrsModule],
@@ -17,6 +18,7 @@ import { AtivarUnidadeCommandHandler } from '@/app/command-handlers/ativar-unida
     DesativarUnidadeCommandHandler,
     ListarTodasUnidadesQueryHandler,
     BuscarUnidadePorIdQueryHandler,
+    DashboardUnidadeQueryHandler,
   ],
 })
 export class AppModule {}

@@ -65,7 +65,7 @@ export class CriarUnidadeCommandHandler
       url_facebook: unidadeCriada.urlFacebook,
       url_instagram: unidadeCriada.urlInstagram,
       url_youtube: unidadeCriada.urlYoutube,
-      status: unidadeCriada.status,
+      status: (+unidadeCriada.status).toString(),
     };
   }
 }

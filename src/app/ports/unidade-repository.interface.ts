@@ -8,4 +8,8 @@ export interface IUnidadeRepository {
   listarTodos(desativados: boolean): Promise<Unidade[]>;
 
   buscarPorId(id: number): Promise<Unidade | null>;
+
+  contarAtivas(): Promise<number>;
+
+  contarInativas(): Promise<number>;
 }

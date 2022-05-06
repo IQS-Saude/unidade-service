@@ -42,4 +42,12 @@ export class UnidadeRepository implements IUnidadeRepository {
 
     return model ? UnidadeMapper.toDomain(model) : null;
   }
+
+  contarAtivas(): Promise<number> {
+    return this.repository.count({ status: true });
+  }
+
+  contarInativas(): Promise<number> {
+    return this.repository.count({ status: false });
+  }
 }

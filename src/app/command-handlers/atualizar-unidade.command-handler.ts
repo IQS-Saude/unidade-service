@@ -68,7 +68,7 @@ export class AtualizarUnidadeCommandHandler
       url_facebook: unidadeAtualizada.urlFacebook,
       url_instagram: unidadeAtualizada.urlInstagram,
       url_youtube: unidadeAtualizada.urlYoutube,
-      status: unidadeAtualizada.status,
+      status: (+unidadeAtualizada.status).toString(),
     };
   }
 }

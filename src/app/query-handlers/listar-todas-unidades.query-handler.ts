@@ -41,7 +41,7 @@ export class ListarTodasUnidadesQueryHandler
       url_facebook: unidade.urlFacebook,
       url_instagram: unidade.urlInstagram,
       url_youtube: unidade.urlYoutube,
-      status: unidade.status,
+      status: (+unidade.status).toString(),
     }));
   }
 }
