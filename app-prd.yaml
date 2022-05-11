@@ -104,13 +104,13 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts:
-        - api.informacaoquesalva.com.br
+        - aquiagenda.com.br
       secretName: letsencrypt-nginx
   rules:
-    - host: api.informacaoquesalva.com.br
+    - host: aquiagenda.com.br
       http:
         paths:
-          - path: /unidade
+          - path: /unidades
             pathType: Prefix
             backend:
               service:
