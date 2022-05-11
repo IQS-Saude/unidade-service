@@ -98,6 +98,8 @@ kind: Ingress
 metadata:
   name: ingress-unidade-service
   namespace: prd-iqs-services
+  annotations:
+    cert-manager.io/issuer: letsencrypt-nginx
 spec:
   ingressClassName: nginx
   tls:
