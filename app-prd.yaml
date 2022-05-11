@@ -20,7 +20,7 @@ spec:
         app.kubernetes.io/name: unidade-service
     spec:
       containers:
-        - image: registry.digitalocean.com/pierx/unidade-service:IMAGE_TAG
+        - image: registry.digitalocean.com/iqs-site-applications-images/unidade-service:IMAGE_TAG
           imagePullPolicy: Always
           name: unidade-service
           volumeMounts:
@@ -39,7 +39,7 @@ spec:
             - name: NODE_ENV
               value: 'production'
             - name: APP_PORT
-              value: 8080
+              value: '8080'
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
