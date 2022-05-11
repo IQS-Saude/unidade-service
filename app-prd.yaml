@@ -1,0 +1,139 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: prd-iqs-services
+  name: unidade-service
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: unidade-service
+  replicas: 1
+  minReadySeconds: 30
+  strategy:
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: unidade-service
+    spec:
+      containers:
+        - image: registry.digitalocean.com/pierx/unidade-service:IMAGE_TAG
+          imagePullPolicy: Always
+          name: unidade-service
+          volumeMounts:
+            - name: mysql-cert
+              mountPath: /etc/ssl/certs/do-mysql-cert.crt
+              subPath: do-mysql-cert.crt
+              readOnly: false
+          resources:
+            requests:
+              cpu: 0.1
+              memory: 128Mi
+            limits:
+              memory: 256Mi
+              cpu: 0.2
+          env:
+            - name: NODE_ENV
+              value: 'production'
+            - name: APP_PORT
+              value: 8080
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: unidade-service
+                  key: db_host
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: unidade-service
+                  key: db_name
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: unidade-service
+                  key: db_pass
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: unidade-service
+                  key: db_user
+            - name: DB_SSL
+              valueFrom:
+                secretKeyRef:
+                  name: unidade-service
+                  key: db_ssl
+            - name: DB_SSL_CERT_PATH
+              value: '/etc/ssl/certs/do-mysql-cert.crt'
+          ports:
+            - containerPort: 8080
+      volumes:
+        - name: mysql-cert
+          configMap:
+            name: mysql-cert
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: prd-iqs-services
+  name: unidade-service
+spec:
+  ports:
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+  type: NodePort
+  selector:
+    app.kubernetes.io/name: unidade-service
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-unidade-service
+  namespace: prd-iqs-services
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - api.informacaoquesalva.com.br
+      secretName: letsencrypt-nginx
+  rules:
+    - host: api.informacaoquesalva.com.br
+      http:
+        paths:
+          - path: /unidade
+            pathType: Prefix
+            backend:
+              service:
+                name: unidade-service
+                port:
+                  number: 8080
+---
+# HPA
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: unidade-service
+  namespace: prd-iqs-services
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: unidade-service
+  minReplicas: 1
+  maxReplicas: 2
+  targetCPUUtilizationPercentage: 80
+---
+# PDB
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: unidade-service
+  namespace: prd-iqs-services
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: unidade-service
+  minAvailable: 100%

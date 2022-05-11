@@ -6,6 +6,7 @@ import { UnidadeRepository } from '@/infrastructure/adapters/repositories/unidad
 import { AppModule } from '@/app/app.module';
 import { CqrsModule } from '@nestjs/cqrs';
 import { UnidadeModel } from '@/infrastructure/data/models/unidade.model';
+import { typeOrmConfig } from '@/ioc/configurations/typeorm.configuration';
 
 @Global()
 @Module({
@@ -13,17 +14,7 @@ import { UnidadeModel } from '@/infrastructure/data/models/unidade.model';
     AppModule,
     CqrsModule,
     ConfigModule.forRoot(),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: process.env.DB_HOST,
-      port: +process.env.DB_PORT,
-      username: process.env.DB_USER,
-      password: process.env.DB_PASS,
-      database: process.env.DB_NAME,
-      migrations: ['{dist, src}/infrastructure/data/migrations/*.{js, ts}'],
-      migrationsRun: true,
-      autoLoadEntities: true,
-    }),
+    TypeOrmModule.forRoot(typeOrmConfig),
     TypeOrmModule.forFeature([UnidadeModel]),
   ],
   providers: [
