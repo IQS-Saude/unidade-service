@@ -45,6 +45,11 @@ spec:
                 secretKeyRef:
                   name: unidade-service
                   key: db_host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: unidade-service
+                  key: db_port
             - name: DB_NAME
               valueFrom:
                 secretKeyRef:
