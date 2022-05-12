@@ -17,9 +17,7 @@ export class ListarTodasUnidadesQueryHandler
   ) {}
 
   async execute(query: ListarTodasUnidadesQuery): Promise<UnidadeResponse[]> {
-    const unidades = await this.unidadeRepository.listarTodos(
-      query.desativados,
-    );
+    const unidades = await this.unidadeRepository.listarTodos(query.status);
 
     return unidades.map((unidade) => ({
       id: unidade.getId(),

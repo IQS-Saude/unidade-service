@@ -38,15 +38,17 @@ export class UnidadesController {
   }
 
   @ApiQuery({
-    name: 'desativados',
+    name: 'status',
     type: Boolean,
     description:
       'Mandar como true caso queira retornar unidades com status false',
     required: false,
   })
   @Get()
-  async listarTodos(@Query('desativados') desativados?: boolean) {
-    return this.queryBus.execute(new ListarTodasUnidadesQuery(desativados));
+  async listarTodos(@Query('status') status?: boolean) {
+    return this.queryBus.execute(
+      new ListarTodasUnidadesQuery(status ? status : true),
+    );
   }
 
   @Get('/unidade/:id')

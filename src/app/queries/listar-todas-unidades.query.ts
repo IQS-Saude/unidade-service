@@ -1,3 +1,3 @@
 export class ListarTodasUnidadesQuery {
-  constructor(public readonly desativados: boolean) {}
+  constructor(public readonly status: boolean) {}
 }
