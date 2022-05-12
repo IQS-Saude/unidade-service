@@ -7,7 +7,7 @@ import {
   Matches,
   ValidateNested,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 
 export class CriarUnidadeEnderecoRequest {
   @ApiProperty({
@@ -63,13 +63,7 @@ export class CriarUnidadeEnderecoRequest {
     example: '-20.82005724475512',
   })
   @IsOptional()
-  @IsNumberString(
-    {
-      allowInfinity: false,
-      allowNaN: false,
-    },
-    { message: 'latitude é um numero' },
-  )
+  @Transform(({ value }) => parseFloat(value))
   latitude?: number;
 
   @ApiPropertyOptional({
@@ -77,13 +71,7 @@ export class CriarUnidadeEnderecoRequest {
     example: '-49.339789263013024',
   })
   @IsOptional()
-  @IsNumberString(
-    {
-      allowInfinity: false,
-      allowNaN: false,
-    },
-    { message: 'longitude é um numero' },
-  )
+  @Transform(({ value }) => parseFloat(value))
   longitude?: number;
 }
 

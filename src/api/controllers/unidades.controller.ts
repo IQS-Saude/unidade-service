@@ -47,7 +47,7 @@ export class UnidadesController {
   @Get()
   async listarTodos(@Query('status') status?: boolean) {
     return this.queryBus.execute(
-      new ListarTodasUnidadesQuery(status ? status : true),
+      new ListarTodasUnidadesQuery(status !== undefined ? status : true),
     );
   }
 

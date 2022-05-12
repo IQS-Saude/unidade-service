@@ -35,10 +35,10 @@ export class UnidadeModel {
   @Column('bigint')
   cep: number;
 
-  @Column('decimal', { nullable: true })
+  @Column('decimal', { nullable: true, scale: 8, precision: 12 })
   latitude?: number;
 
-  @Column('decimal', { nullable: true })
+  @Column('decimal', { nullable: true, scale: 8, precision: 12 })
   longitude?: number;
 
   @Column('bigint', { nullable: true })
