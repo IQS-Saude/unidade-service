@@ -8,6 +8,8 @@ async function bootstrap() {
 
   app.setGlobalPrefix('unidades');
   app.useGlobalPipes(new ValidationPipe());
+  app.enableCors();
+
   SwaggerConfiguration.addSwagger(app);
 
   await app.listen(process.env.APP_PORT);
