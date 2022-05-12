@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  ParseBoolPipe,
   Patch,
   Post,
   Query,
@@ -42,13 +43,11 @@ export class UnidadesController {
     type: Boolean,
     description:
       'Mandar como true caso queira retornar unidades com status false',
-    required: false,
+    required: true,
   })
   @Get()
-  async listarTodos(@Query('status') status?: boolean) {
-    return this.queryBus.execute(
-      new ListarTodasUnidadesQuery(status !== undefined ? status : true),
-    );
+  async listarTodos(@Query('status', ParseBoolPipe) status: boolean) {
+    return this.queryBus.execute(new ListarTodasUnidadesQuery(status));
   }
 
   @Get('/unidade/:id')
