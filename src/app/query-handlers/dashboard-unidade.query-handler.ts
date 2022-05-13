@@ -23,8 +23,8 @@ export class DashboardUnidadeQueryHandler
     ]);
 
     return {
-      ativas: contagem[0],
-      inativas: contagem[1],
+      ativos: contagem[0],
+      inativos: contagem[1],
       nome: 'unidades',
     };
   }

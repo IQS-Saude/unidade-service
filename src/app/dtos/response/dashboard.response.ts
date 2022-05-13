@@ -1,5 +1,5 @@
 export interface DashboardResponse {
-  ativas: number;
-  inativas: number;
+  ativos: number;
+  inativos: number;
   nome: string;
 }
