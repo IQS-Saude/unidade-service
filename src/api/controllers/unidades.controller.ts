@@ -19,23 +19,30 @@ import { BuscarUnidadePorIdQuery } from '@/app/queries/buscar-unidade-por-id.que
 import { DesativarUnidadeCommand } from '@/app/commands/desativar-unidade.command';
 import { AtivarUnidadeCommand } from '@/app/commands/ativar-unidade.command';
 import { DashboardUnidadeQuery } from '@/app/queries/dashboard-unidade.query';
+import { BaseController } from '@/api/controllers/base.controller';
 
 @ApiTags('UnidadesController')
 @Controller()
-export class UnidadesController {
+export class UnidadesController extends BaseController {
   constructor(
     private readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus,
-  ) {}
+  ) {
+    super();
+  }
 
   @Post()
   async criar(@Body() request: CriarUnidadeDataRequest) {
-    return this.commandBus.execute(new CriarUnidadeCommand(request.data));
+    return this.success(
+      await this.commandBus.execute(new CriarUnidadeCommand(request.data)),
+    );
   }
 
   @Patch()
   async atualizar(@Body() request: AtualizarUnidadeDataRequest) {
-    return this.commandBus.execute(new AtualizarUnidadeCommand(request.data));
+    return this.success(
+      await this.commandBus.execute(new AtualizarUnidadeCommand(request.data)),
+    );
   }
 
   @ApiQuery({
@@ -47,26 +54,36 @@ export class UnidadesController {
   })
   @Get()
   async listarTodos(@Query('status', ParseBoolPipe) status: boolean) {
-    return this.queryBus.execute(new ListarTodasUnidadesQuery(status));
+    return this.success(
+      await this.queryBus.execute(new ListarTodasUnidadesQuery(status)),
+    );
   }
 
   @Get('/unidade/:id')
   async buscarPorId(@Param('id') id: number) {
-    return this.queryBus.execute(new BuscarUnidadePorIdQuery(id));
+    return this.success(
+      await this.queryBus.execute(new BuscarUnidadePorIdQuery(id)),
+    );
   }
 
   @Post('/unidade/:id/ativar')
   async ativar(@Param('id') id: number) {
-    return this.commandBus.execute(new AtivarUnidadeCommand(id));
+    return this.success(
+      await this.commandBus.execute(new AtivarUnidadeCommand(id)),
+    );
   }
 
   @Post('/unidade/:id/desativar')
   async desativar(@Param('id') id: number) {
-    return this.commandBus.execute(new DesativarUnidadeCommand(id));
+    return this.success(
+      await this.commandBus.execute(new DesativarUnidadeCommand(id)),
+    );
   }
 
   @Get('/dashboard')
   async dashboard() {
-    return this.queryBus.execute(new DashboardUnidadeQuery());
+    return this.success(
+      await this.queryBus.execute(new DashboardUnidadeQuery()),
+    );
   }
 }
