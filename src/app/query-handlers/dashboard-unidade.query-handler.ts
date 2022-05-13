@@ -25,6 +25,7 @@ export class DashboardUnidadeQueryHandler
     return {
       ativas: contagem[0],
       inativas: contagem[1],
+      nome: 'unidades',
     };
   }
 }
