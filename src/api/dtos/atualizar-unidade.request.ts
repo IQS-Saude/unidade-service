@@ -1,6 +1,7 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import {
   IsBooleanString,
+  IsNumber,
   IsNumberString,
   IsOptional,
   IsString,
@@ -92,7 +93,10 @@ export class AtualizarUnidadeRequest {
     description: 'Id da unidade',
     example: 1,
   })
-  @IsNumberString({ message: 'id deve ser um numero inteiro' })
+  @IsNumber(
+    { maxDecimalPlaces: 0, allowNaN: false, allowInfinity: false },
+    { message: 'id deve ser um numero inteiro' },
+  )
   id: number;
 
   @ApiProperty({
